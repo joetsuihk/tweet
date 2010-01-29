@@ -104,16 +104,19 @@
       query += '&q=from:'+s.username.join('%20OR%20from:');
       var url = 'http://search.twitter.com/search.json?&'+query+'&rpp='+s.count+'&callback=?';
       if (s.loading_text) $(this).append(loading);
+      //trim count
+      trimed = 0;
       $.getJSON(url, function(data){
         if (s.loading_text) loading.remove();
         if (s.intro_text) list.before(intro);
         $.each(data.results, function(i,item){
           //filterinf RT
           if (s.filter_rt) {
-        	  if (item.text.substr(0,4).indexOf('RT',0)!=-1) {
-        		  return;
-        	  }
-          }
+        	if (item.text.substr(0,4).indexOf('RT',0)!=-1) {
+        		trimed++;
+        		return;
+        	}
+          };
           // auto join text based on verb tense and content
           if (s.join_text == "auto") {
             if (item.text.match(/^(@([A-Za-z0-9-_]+)) .*/i)) {
@@ -145,6 +148,14 @@
           list.children('li:odd').addClass('tweet_even');
           list.children('li:even').addClass('tweet_odd');
         });
+        
+        if (s.filter_rt) {
+          if (s.outro_text)
+            s.outro_text = s.outro_text + "Out of "+s.count+", "+trimed+" tweet trimed.";
+          else
+        	  s.outro_text = "Out of "+s.count+", "+trimed+" tweets trimed.";
+          outro = '<p class="tweet_outro">'+s.outro_text+'</p>';
+        }
         if (s.outro_text) list.after(outro);
       });
 
