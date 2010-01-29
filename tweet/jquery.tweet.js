@@ -14,7 +14,8 @@
       auto_join_text_reply: "i replied to",   // [string]   auto tense for replies: "i replied to" @someone "with"
       auto_join_text_url: "i was looking at", // [string]   auto tense for urls: "i was looking at" http:...
       loading_text: null,                     // [string]   optional loading text, displayed while tweets load
-      query: null                             // [string]   optional search query
+      query: null,                            // [string]   optional search query
+      filter_rt: true                         // [true/false]    filter tweets with RT
     };
     
     if(o) $.extend(s, o);
@@ -107,6 +108,12 @@
         if (s.loading_text) loading.remove();
         if (s.intro_text) list.before(intro);
         $.each(data.results, function(i,item){
+          //filterinf RT
+          if (s.filter_rt) {
+        	  if (item.text.substr(0,4).indexOf('RT',0)!=-1) {
+        		  return;
+        	  }
+          }
           // auto join text based on verb tense and content
           if (s.join_text == "auto") {
             if (item.text.match(/^(@([A-Za-z0-9-_]+)) .*/i)) {

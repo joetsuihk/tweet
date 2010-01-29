@@ -1,13 +1,17 @@
 Tweet!
 put twitter on your website with tweet!, an unobtrusive javascript plugin for jquery.
 
+=== Fork ===
+
+  This fork adds a config-able function to remove tweets that starts with 'RT', thus reduce noise.
+
 === Demo ===
 
-  http://tweet.seaofclouds.com/ and http://seaofclouds.com/
+  N.A. at the moment
 
 === Download ===
 
-  Tar http://github.com/seaofclouds/tweet/tarball/master
+  Tar http://github.com/joetsuihk/tweet/tarball/master
 
 === Features ===
 

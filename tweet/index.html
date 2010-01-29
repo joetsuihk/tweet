@@ -39,6 +39,12 @@
           query: "from%3Aseaofclouds+OR+from%3Alaughingsquid",
           loading_text: "searching twitter..."
         });
+		$("#filter").tweet({
+          avatar_size: 32,
+          count: 4,
+          query: "apple",
+          loading_text: "searching adn filtering twitter..."
+        });
       })      
     </script>
   </head>
@@ -60,6 +66,9 @@
       <p>displaying four tweets from two users with the query "<a href="http://search.twitter.com/search?q=from%3Aseaofclouds+OR+from%3Alaughingsquid">from:seaofclouds OR from:laughingsquid</a>".</p>
       <div id='fromtwo' class="query"></div>
       
+	  <p>Filter RT with query "<a href="http://search.twitter.com/search?q=apple">apple</a>". (From 4 tweets)</p>
+	  <div id='filter' class="query"></div>
+	  
       <h3>Features</h3>
       <ul>
         <li>small size and fast download time</li>
